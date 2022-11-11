@@ -49,12 +49,11 @@
             <ul class="navbar-nav ms-auto">
               <li class="nav-item"><a href="index.php" class="nav-link">Home</a></li>
               <li class="nav-item"><a href="addproperty.php" class="nav-link">Post a property</a></li>
-              <li class="nav-item"><a href="sellerlogin.php" class="nav-link">Seller Login</a></li>
-              <li class="nav-item"><a href="adminlogin.php" class="nav-link">Admin Login</a></li>
+              <li class="nav-item"><a href="sellerlogin.php" class="nav-link">Login</a></li>
               <li class="nav-item"><a href="forsale.php" class="nav-link">For Sale</a></li>
               <li class="nav-item"><a href="forrent.php" class="nav-link">For Rent</a></li>
               <li class="nav-item"><a href="addseller.php" class="nav-link">Register</a></li>
-              <li class="nav-item"><a href="contact.php" class="nav-link">Contact</a></li>
+
             </ul>
           </div>
         </div>

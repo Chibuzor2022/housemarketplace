@@ -11,7 +11,7 @@
 </head>
 
 <body>
-  <footer class="bg-dark">
+  <footer class="bg-dark" style="margin-top:300px">
     <div class="container">
       <div class="row">
 
@@ -27,7 +27,8 @@
     </div>
   </footer>
 
-  <script src="bootstrap/js/bootstrap.bundle.js"></script>
+
+  <script src="js/bootstrap.bundle.js"></script>
 </body>
 
 </html>

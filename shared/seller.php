@@ -1,6 +1,7 @@
 <?php
 include_once "constants.php";
 
+
 //class definition
 class Seller
 {
@@ -9,7 +10,6 @@ class Seller
   var $firstname;
   var $lastname;
   var $emailaddress;
-  var $password;
   var $phonenumber;
   var $dbcon; //database connection handler
 
@@ -19,7 +19,7 @@ class Seller
     if ($this->dbcon->connect_error) {
       die("connection failed" . $this->dbcon->connect_error);
     } else {
-      echo "connection successful";
+      // echo "connection successful";
     }
   }
 
@@ -44,7 +44,7 @@ class Seller
 
     //get result
     if ($statement->error) {
-      $result = "Oops something went wrong .$statement->error"; //delete the error part after production
+      $result = "Oops something went wrong .$statement->error";
     } else {
       $result = "success";
     }
@@ -76,7 +76,6 @@ class Seller
       if (password_verify($password, $row['password'])) {
         session_start();
         $_SESSION['seller_id'] = $row['seller_id'];
-        $_SESSION['property_id '] = $row['property_id'];
         $_SESSION['firstname'] = $row['firstname'];
         $_SESSION['lastname'] = $row['lastname'];
         $_SESSION['emailaddress'] = $row['emailaddress'];
@@ -90,6 +89,7 @@ class Seller
       return false;
     }
   }
+  #end logout method
   function logout()
   {
     session_start();
@@ -99,4 +99,79 @@ class Seller
     exit();
   }
   #end logout method
+  //to get one seller details
+
+  function getSeller($sellerid)
+  {
+    //prepare the statement
+    $statement = $this->dbcon->prepare("SELECT* FROM sellers WHERE seller_id=?");
+    //bind parameter
+    $statement->bind_param("i", $sellerid);
+    //execute
+    $statement->execute();
+    //get result set
+    $result = $statement->get_result();
+    if ($result->num_rows == 1) {
+      return $result->fetch_assoc();
+    } else {
+      return "Oops! something happened";
+    }
+  }
+  #start updateSeller method
+
+
+  function updateSeller($firstname, $lastname, $emailaddress,  $phonenumber, $sellerid)
+
+  {
+
+    //prepare the statement
+
+    $statement = $this->dbcon->prepare("UPDATE `sellers` SET `firstname` = ?, `lastname` = ?, `emailaddress` = ?, `phonenumber` = ? WHERE `sellers`.`seller_id` = ?");
+
+    //bind parameters
+    $statement->bind_param("ssssi", $firstname, $lastname, $emailaddress, $phonenumber, $sellerid);
+    //execute the query
+
+    $statement->execute();
+
+    if ($statement->affected_rows == 1) {
+      return "success";
+    } else {
+      return "Oops! something went wrong" . $statement->error;
+    }
+  }
+
+  function getAllSellers()
+  {
+
+    //prepare statement
+    $stmt = $this->dbcon->prepare("SELECT * from sellers");
+
+    //execute
+    $stmt->execute();
+    //get the result set
+    $result = $stmt->get_result();
+
+    $data = array();
+    if ($result->num_rows > 0) {
+
+      while ($row = $result->fetch_assoc()) {
+        $data[] = $row;
+      }
+    }
+    return $data;
+  }
+  function deleteSeller($sellerid)
+  {
+    $statement = $this->dbcon->prepare("DELETE FROM sellers WHERE seller_id=?");
+    //bind statemnet
+    $statement->bind_param("i", $sellerid);
+    //execute
+    $statement->execute();
+    if ($statement->affected_rows == 1) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }

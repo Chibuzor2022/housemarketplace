@@ -50,9 +50,6 @@
 </head>
 
 <body>
-  <!-- Home Section -->
-  <!-- <section id="home">
-    <header id="header"> -->
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
     <div class="container">
@@ -64,11 +61,10 @@
         <ul class="navbar-nav ms-auto">
           <li class="nav-item"><a href="index.php" class="nav-link">Home</a></li>
           <li class="nav-item"><a href="addproperty.php" class="nav-link">Post a property</a></li>
+
           <li class="nav-item"><a href="forsale.php" class="nav-link">For Sale</a></li>
           <li class="nav-item"><a href="forrent.php" class="nav-link">For Rent</a></li>
-          <li class="nav-item"><a href="login.php" class="nav-link">Login </a></li>
-          <li class="nav-item"><a href="addseller.php" class="nav-link">Register</a></li>
-          <li class="nav-item"><a href="contact.php" class="nav-link">Contact</a></li>
+          <li class="nav-item"><a href="sellerdashboard.php" class="nav-link">Dashboard</a></li>
           <li class="nav-item"><a href="logout.php" class="nav-link">Logout</a></li>
         </ul>
       </div>

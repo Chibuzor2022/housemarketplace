@@ -19,7 +19,7 @@
       $errors['errorphonenumber'] = "Phone Number field must be filled";
     }
 
-    //if there is no validatio error
+    //if there is no validation error
     if (count($errors) == 0) {
       //include the seller class
       include_once "shared/seller.php";
@@ -31,10 +31,10 @@
       //call the insertSelller method
       $output = $obj->insertSeller($_REQUEST['firstname'], $_REQUEST['lastname'], $_REQUEST['emailaddress'], $_REQUEST['password'], $_REQUEST['phonenumber']);
 
-      //redirect to nanother page
+      //redirect to another page
       if ($output != 'success') {
 
-        echo $output; // meaning what?
+        echo $output;
       } else {
         header("Location: regstatus.php?msg=$output");
       }
@@ -79,7 +79,7 @@
 
 
            <label for="phonenumber">Phone Number</label>
-           <input type="text" name="phonenumber" id="phonenumber" class="form-control">
+           <input type="text" name="phonenumber" id="phonenumber" class="form-control mb-3">
 
 
            <input class="btn btn-secondary" type="reset" name="reset" id="reset" value="Reset">

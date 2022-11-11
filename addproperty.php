@@ -1,5 +1,6 @@
 <?php include_once "portalheader.php";
 
+include_once "shared/property.php";
 
 
 if (isset($_REQUEST['submitbtn'])) {
@@ -17,6 +18,7 @@ if (isset($_REQUEST['submitbtn'])) {
     $errors['errordescription'] = "Description field must be filled";
   }
 
+
   //if there is no validation error
   if (count($errors) == 0) {
     //include the property class
@@ -28,8 +30,6 @@ if (isset($_REQUEST['submitbtn'])) {
 
     //call the insertProperty method
 
-
-
     $output = $obj->insertProperty($_SESSION['seller_id'], $_REQUEST['title'], $_REQUEST['price'], $_REQUEST['address'], $_REQUEST['description'], $_REQUEST['type'], $_REQUEST['status'], $_REQUEST['bedroom'], $_REQUEST['bathroom'], $_REQUEST['toilet'], $_REQUEST['state'], $_REQUEST['lga'], $_REQUEST['category']);
 
     //redirect to nanother page
@@ -37,7 +37,12 @@ if (isset($_REQUEST['submitbtn'])) {
 
       echo $output; //display the error message
     } else {
-      header("Location: regstatus.php?msg=$output");
+      $status = "success";
+      $msg = "Property was successfully listed";
+
+      //redirect
+      header("Location: myproperties.php?msg=$msg&status=$status");
+      exit();
     }
   }
 }
@@ -59,15 +64,25 @@ if (isset($_REQUEST['submitbtn'])) {
 
 
     ?>
-    <form action="" method="post">
+    <form name="propertyform" id="propertyfrom" action='addproperty.php' method="post" enctype="multipart/form-data">
       <div class="row ">
         <div class="mb-3 col-6">
           <label for="title" class="form-label">Title</label>
-          <input type="text" class="form-control" id="title" name="title">
+          <input type="text" class="form-control" id="title" name="title" value="<?php
+                                                                                  if (isset($_POST['title'])) {
+                                                                                    echo $_POST['title'];
+                                                                                  }
+
+                                                                                  ?>">
         </div>
         <div class="col-6">
           <label for="marketstatus" class="form-label">Market Staus</label>
-          <select name="status" id="status" class="form-select" aria-label="Market Status">
+          <select name="status" id="status" class="form-select" aria-label="Market Status" value="<?php
+                                                                                                  if (isset($_POST['status'])) {
+                                                                                                    echo $_POST['status'];
+                                                                                                  }
+
+                                                                                                  ?>">
             <option selected>Choose One</option>
             <option value="available">Available</option>
             <option value="sold">Sold</option>
@@ -97,7 +112,7 @@ if (isset($_REQUEST['submitbtn'])) {
           </select>
         </div>
         <div class="row">
-          <div class="col-3 mb-4">
+          <div class="col-4 mb-3">
             <label for="bedroom">Bedroom</label><br>
             <select name="bedroom" class="form-select" aria-label="Bedrooms">
               <option selected>Choose One</option>
@@ -113,7 +128,7 @@ if (isset($_REQUEST['submitbtn'])) {
               <option value="10">10</option>
             </select>
           </div>
-          <div class="col-3 mb-4">
+          <div class="col-4 mb-3">
             <label for="bathroom">Bathroom</label><br>
             <select name="bathroom" class="form-select" aria-label="Bathrooms">
               <option selected>Choose One</option>
@@ -129,7 +144,7 @@ if (isset($_REQUEST['submitbtn'])) {
               <option value="10">10</option>
             </select>
           </div>
-          <div class="mb-3 col-4">
+          <div class="col-4 mb-3">
             <label for="toilet">Toilet</label>
             <select name="toilet" class="form-select" aria-label="Toilets">
               <option selected>Choose One</option>
@@ -152,61 +167,45 @@ if (isset($_REQUEST['submitbtn'])) {
       <div class="row">
         <div class="col-6">
           <label for="state" class="form-label">State</label>
-          <select class="form-select" name="state">
-            <option selected>Please choose your state</option>
-            <option value='Abia'>Abia</option>
-            <option value='Adamawa'>Adamawa</option>
-            <option value='AkwaIbom'>AkwaIbom</option>
-            <option value='Anambra'>Anambra</option>
-            <option value='Bauchi'>Bauchi</option>
-            <option value='Bayelsa'>Bayelsa</option>
-            <option value='Benue'>Benue</option>
-            <option value='Borno'>Borno</option>
-            <option value='CrossRivers'>CrossRivers</option>
-            <option value='Delta'>Delta</option>
-            <option value='Ebonyi'>Ebonyi</option>
-            <option value='Edo'>Edo</option>
-            <option value='Ekiti'>Ekiti</option>
-            <option value='Enugu'>Enugu</option>
-            <option value='Gombe'>Gombe</option>
-            <option value='Imo'>Imo</option>
-            <option value='Jigawa'>Jigawa</option>
-            <option value='Kaduna'>Kaduna</option>
-            <option value='Kano'>Kano</option>
-            <option value='Katsina'>Katsina</option>
-            <option value='Kebbi'>Kebbi</option>
-            <option value='Kogi'>Kogi</option>
-            <option value='Kwara'>Kwara</option>
-            <option value='Lagos'>Lagos</option>
-            <option value='Nasarawa'>Nasarawa</option>
-            <option value='Niger'>Niger</option>
-            <option value='Ogun'>Ogun</option>
-            <option value='Ondo'>Ondo</option>
-            <option value='Osun'>Osun</option>
-            <option value='Oyo'>Oyo</option>
-            <option value='Plateau'>Plateau</option>
-            <option value='Rivers'>Rivers</option>
-            <option value='Sokoto'>Sokoto</option>
-            <option value='Taraba'>Taraba</option>
-            <option value='Yobe'>Yobe</option>
-            <option value='Zamfara'>Zamafara</option>
-          </select>
+          <input type="text" name="state" id="state" class="form-control" value="<?php
+                                                                                  if (isset($_POST['state'])) {
+                                                                                    echo $_POST['state'];
+                                                                                  }
+
+                                                                                  ?>">
         </div>
-        <div class="col-6 mb-3">
+        <div class="col-6">
           <label for="lga" class="form-label">LGA</label>
-          <input type="text" class="form-control" id="lga" name="lga">
+          <input type="text" name="lga" id="lga" class="form-control" value="<?php
+                                                                              if (isset($_POST['lga'])) {
+                                                                                echo $_POST['lga'];
+                                                                              }
+
+                                                                              ?>">
         </div>
       </div>
+
+
       <div class="row">
         <div class="mb-3">
           <label for="address" class="form-label">Address</label>
-          <textarea class="form-control" id="address" name="address" rows="2"></textarea>
+          <textarea class="form-control" id="address" name="address" rows="2"><?php
+                                                                              if (isset($_POST['address'])) {
+                                                                                echo $_POST['address'];
+                                                                              }
+
+                                                                              ?></textarea>
         </div>
       </div>
       <div class="row">
         <div class="col-6 mb-3">
           <label for="price" class="form-label">Price</label>
-          <input type="text" class="form-control" id="price" name="price">
+          <input type="text" class="form-control" id="price" name="price" value="<?php
+                                                                                  if (isset($_POST['price'])) {
+                                                                                    echo $_POST['price'];
+                                                                                  }
+
+                                                                                  ?>">
         </div>
 
 
@@ -215,16 +214,31 @@ if (isset($_REQUEST['submitbtn'])) {
       <div class="row">
         <div class="mb-3">
           <label for="description" class="form-label">Description</label>
-          <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+          <textarea class="form-control" id="description" name="description" rows="3"><?php
+                                                                                      if (isset($_POST['description'])) {
+                                                                                        echo $_POST['description'];
+                                                                                      }
+
+                                                                                      ?></textarea>
         </div>
       </div>
+      <div class="control-group form-group mb-3">
+        <div class="controls">
+          <label>Upload Image</label>
+          <input type="file" class="form-control" id="image" name="image[]" multiple>
+        </div>
+      </div>
+
       <div class="row">
         <button type="reset" class="btn btn-primary col-2 me-2">Reset</button>
         <input type="submit" class="btn btn-primary col-2" value="submit" name="submitbtn">
       </div>
     </form>
   </div>
-
+  </div>
 </main>
+
+
+
 
 <?php include_once "portalfooter.php" ?>

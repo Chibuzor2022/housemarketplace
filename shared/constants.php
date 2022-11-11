@@ -10,3 +10,15 @@
   //application constants
 
   define("APP_NAME", "House Marketplace");
+
+
+  #begin sanitize method
+  function sanitizeInput($data)
+  {
+    $data = trim($data);
+    $data = htmlspecialchars($data);
+    $data = addslashes($data);
+
+    return $data;
+  }
+ #end sanitize method   

@@ -32,7 +32,7 @@ if (isset($_POST['loginbtn'])) {
       $error[] = "Invalid username or password";
     } else {
       //redirect the user to dashboard/profile page
-      header("Location:dashboard.php");
+      header("Location:sellerdashboard.php");
       exit();
     }
   }
@@ -40,7 +40,7 @@ if (isset($_POST['loginbtn'])) {
 ?>
 <main>
   <div class="container">
-    <div class="row ">
+    <div class="row my-5">
 
       <div class="col-6 ">
         <h2>Seller Login</h2>
@@ -53,9 +53,7 @@ if (isset($_POST['loginbtn'])) {
             echo "<div class='text-danger'>$value</div>";
           }
         }
-        // if (isset($_REQUEST['notice'])) {
-        //   echo "<div class='text-danger'>" . $_REQUEST['notice'] . "</div>";
-        // }
+
         ?>
         <form action=" sellerlogin.php" method="post">
           <div class="form-group">
@@ -68,7 +66,7 @@ if (isset($_POST['loginbtn'])) {
             <input type="password" name='password' class="form-control" id="password">
           </div>
 
-          <input type="submit" class="btn btn-primary" id="loginbtn" name="loginbtn" value="Seller login">
+          <input type="submit" class="btn btn-primary mt-3" id="loginbtn" name="loginbtn" value="Seller login">
         </form>
       </div>
     </div>
