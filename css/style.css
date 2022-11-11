@@ -1,0 +1,188 @@
+body {
+  font-family: "Albert Sans", sans-serif;
+ 
+}
+
+#home {
+  min-height: 600px;
+  background-image: url('../images/banner_main_project.jpg');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  margin-bottom: 0px 10px 0px 0px ;
+  
+}
+#home-details {
+	padding-top: 100px;
+	color: white;
+	font-size: 20px;
+	background-color: rgba(43, 48, 58, 0.7);
+	height: 600px;
+	text-align: center;
+}
+
+#home-details h1{
+  font-size: 80px;
+  padding-top: 50px;;
+}
+
+#home-details hr{
+	width: 70%;
+  margin: auto
+
+}
+.news-item {
+	width: 30%;
+	float: left;
+}
+.news-item img {
+	width: 30%;
+	float: left;
+	margin-right: 10px;
+	height: 150px;
+ 
+}
+
+#contact-form .form-group {
+  margin-bottom: 20px;
+}
+
+#contact-form label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+#contact-form input,
+#contact-form textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #333;
+}
+
+#contact-form textarea {
+  min-height: 200px;
+}
+
+.underline {
+  display: block;
+  width: 6rem;
+  height: 2px;
+  background-color: #0d6efd;;
+  margin: 0 auto 1rem auto;
+}
+.item {
+  position: relative;
+  background: #0d6efd;
+  overflow: hidden;
+}
+
+.item::after {
+  content: "";
+  position: absolute;
+  display: block;
+  background: inherit;
+  opacity: 0.9;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+   transform: scale(2) translateX(-75%) translateY(-75%) rotate(-28deg);
+   transition: transform 3s cubic-bezier(0.2, 1, 0.3, 1);
+  
+}
+
+.item:hover:after {
+    transform: scale(2) translateX(0) translateY(0) rotate(-28deg);
+}
+
+.item:hover .item-image {
+   transform: scale(1.2);
+}
+
+.item:hover .item-text {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.property-image img {
+  display: block;
+}
+
+.item-text {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  opacity: 0;
+  text-align: center;
+  z-index: 1;
+  color: #fff;
+    transform: translateY(-20%);
+    transition: opacity 500ms cubic-bezier(0.2, 1, 0.3, 1), transform 500ms cubic-bezier(0.2, 1, 0.3, 1);
+  
+}
+
+.item-text-wrap {
+  position: absolute;
+  width: 100%;
+  top: 50%;
+   transform: translateY(-50%);
+}
+
+.item-text-wrap a {
+ text-decoration: none;
+ color: white;
+ border: 2px solid white;
+ padding: 2px;
+}
+.item-text-title {
+  font-size: 2rem;
+  padding: 0 1rem;
+  margin: 5px 0 0 0;
+}
+
+
+#socials a {
+  color: #fff;
+  float: right;
+  margin-right: 20px;
+  
+  
+}
+
+footer {
+  background-color: rgb(78, 156, 167);
+  min-height: 100px;
+  color: #fff;
+  margin-top: 20px;
+  padding: 30px 0px 30px 60px;
+  overflow: hidden;
+ 
+}
+
+.scrollup {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #0d6efd;
+  color: #f4f4f4;
+  font-size: 20px;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  line-height: 50px;
+
+}
+
+
+@media screen and (max-width:480px){
+ 
+  #home-details{
+    font-size: 3rem;
+ 
+  }
+   
+}
+
+
